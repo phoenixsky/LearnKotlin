@@ -1,0 +1,40 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    // ① 导入配置文件，替换repo
+    apply from: "./gradle-script/build-script.gradle"
+    repositories config.repositories
+
+    // ② Gradle插件依赖
+    dependencies {
+        classpath config.gradlePlugin.android
+        classpath config.gradlePlugin.kotlin
+        // maven仓库上传
+        classpath config.gradlePlugin.mavenUpload
+        // 资源混淆
+        classpath config.gradlePlugin.andResGuard
+        // 依赖版本check
+        classpath config.gradlePlugin.checkDepsVersion
+    }
+}
+
+
+// ③ 代码仓库依赖
+allprojects {
+    repositories config.repositories
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+// ④Gradle Task
+// 引入版本check
+apply from: './gradle-script/check-deps-version.gradle'
+
+
+// jenkins的PackageTool脚本会读取该信息
+ext {
+    APPLICATION_ID = "app.phoenixsky.jsbridge"
+    APP_VERSION_CODE = 1
+    APP_VERSION_NAME = '1.0.0'
+}

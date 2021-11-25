@@ -1,0 +1,23 @@
+apply plugin: 'com.android.application'
+
+// 基础module
+apply from: '../gradle-script/base-module.gradle'
+
+// 资源混淆
+apply plugin: 'AndResGuard'
+apply from: '../gradle-script/andResguard.gradle'
+
+
+android {
+    defaultConfig {
+        applicationId APPLICATION_ID
+        versionCode APP_VERSION_CODE as int
+        versionName APP_VERSION_NAME
+    }
+
+
+}
+
+dependencies {
+    implementation config.deps.android.multidex
+}

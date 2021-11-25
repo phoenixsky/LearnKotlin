@@ -1,0 +1,16 @@
+// module：业务模块依赖库。用于模块化分层。如：用户模块、订单模块等。
+
+apply from: "../gradle-script/base-lib.gradle"
+
+dependencies {
+
+    // controller
+    implementation config.deps.android.appcompat
+    implementation config.deps.android.activityKtx
+    implementation config.deps.android.fragmentKtx
+    implementation config.deps.android.viewmodel
+    implementation config.deps.android.viewModelSaveState
+    // view
+    implementation config.deps.android.constraintLayout
+    implementation config.deps.android.recyclerview
+}

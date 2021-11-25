@@ -1,0 +1,316 @@
+def isMacOsX() {
+    return org.gradle.internal.os.OperatingSystem.current().isMacOsX()
+}
+
+andResGuard {
+    andResGuard {
+        // mappingFile = file("./resource_mapping.txt")
+        mappingFile = null
+        useSign = true
+        // 打开这个开关，会keep住所有资源的原始路径，只混淆资源的名字
+        keepRoot = false
+        // 设置这个值，会把arsc name列混淆成相同的名字，减少string常量池的大小
+        fixedResName = "arg"
+        // 打开这个开关会合并所有哈希值相同的资源，但请不要过度依赖这个功能去除去冗余资源
+        mergeDuplicatedRes = true
+        whiteList = [
+                // for your icon
+                "R.mipmap.app_icon",
+                // for fabric
+                "R.string.com.crashlytics.*",
+                // for google-services
+                "R.string.google_app_id",
+                "R.string.gcm_defaultSenderId",
+                "R.string.default_web_client_id",
+                "R.string.ga_trackingId",
+                "R.string.firebase_database_url",
+                "R.string.google_api_key",
+                "R.string.google_crash_reporting_api_key",
+
+                // for your icon
+                "R.drawable.ic_launcher",
+                "R.mipmap.ic_launcher",
+                "R.layout.appdownloader*",
+                "R.string.appdownloader*",
+                "R.drawable.appdownloader*",
+                "R.anim.appdownloader*",
+                "R.style.appdownloader*",
+                "R.color.appdownloader*",
+                "R.id.appdownloader*",
+
+                // umeng
+                "R.anim.umeng*",
+                "R.string.umeng*",
+                "R.string.UM*",
+                "R.string.tb_*",
+                "R.layout.umeng*",
+                "R.layout.socialize_*",
+                "R.layout.*messager*",
+                "R.layout.tb_*",
+                "R.color.umeng*",
+                "R.color.tb_*",
+                "R.style.*UM*",
+                "R.style.umeng*",
+                "R.drawable.umeng*",
+                "R.drawable.tb_*",
+                "R.drawable.sina*",
+                "R.drawable.qq_*",
+                "R.drawable.tb_*",
+                "R.id.umeng*",
+                "R.id.*messager*",
+                "R.id.progress_bar_parent",
+                "R.id.socialize_*",
+                "R.id.webView",
+
+                // tt
+                "R.drawable.tt*",
+                "R.layout.tt*",
+                "R.string.tt*",
+                "R.anim.tt*",
+                "R.color.tt*",
+                "R.dimen.tt*",
+                "R.integer.tt*",
+                "R.style.EditTextStyle",
+                "R.style.Theme.Dialog.TT*",
+                "R.style.tt*",
+                "R.id.tt*",
+                "R.attr.alpha*",
+                "R.attr.coor*",
+                "R.attr.font*",
+                "R.attr.keylines*",
+                "R.attr.layout_*",
+                "R.attr.statusBarBackground*",
+                "R.attr.ttcIndex*",
+                "R.color.notification_*",
+                "R.color.primary_*",
+                "R.color.ripple_*",
+                "R.color.secondary_*",
+                "R.dimen.compat_*",
+                "R.dimen.notification_*",
+                "R.dimen.subtitle_*",
+                "R.drawable.notification_*",
+                "R.drawable.notify_*",
+                "R.id.action*",
+                "R.id.async*",
+                "R.id.blocking*",
+                "R.id.cancel_*",
+                "R.id.chronometer*",
+                "R.id.dash_line*",
+                "R.id.end*",
+                "R.id.forever*",
+                "R.id.icon*",
+                "R.id.info*",
+                "R.id.italic*",
+                "R.id.iv_*",
+                "R.id.left*", "R.id.line*", "R.id.ll_*", "R.id.media_*", "R.id.message_*", "R.id.none*",
+                "R.id.normal",
+                "R.id.notification_background",
+                "R.id.notification_main_column",
+                "R.id.notification_main_column_container",
+                "R.id.permission_list",
+                "R.id.privacy_webview",
+                "R.id.right",
+                "R.id.right_icon",
+                "R.id.right_side",
+                "R.id.start",
+                "R.id.status_bar_latest_event_content",
+                "R.id.tag_ignore",
+                "R.id.tag_transition_group",
+                "R.id.tag_unhandled_key_event_manager",
+                "R.id.tag_unhandled_key_listeners",
+                "R.id.tag_view_name",
+                "R.id.text",
+                "R.id.text2",
+                "R.id.time",
+                "R.id.title",
+                "R.id.title_bar",
+                "R.id.top",
+                "R.id.tv_app_detail",
+                "R.id.tv_app_developer",
+                "R.id.tv_app_name",
+                "R.id.tv_app_privacy",
+                "R.id.tv_app_version",
+                "R.id.tv_empty",
+                "R.id.tv_give_up",
+                "R.id.tv_permission_description",
+                "R.id.tv_permission_title",
+                "R.id.web_frame",
+                "R.integer.cancel_button_image_alpha",
+                "R.integer.status_bar_notification_info_maxnum",
+                "R.integer.tt_video_progress_max",
+                "R.layout.notification_action",
+                "R.layout.notification_action_tombstone",
+                "R.layout.notification_media_action",
+                "R.layout.notification_media_cancel_action",
+                "R.layout.notification_template_big_media",
+                "R.layout.notification_template_big_media_custom",
+                "R.layout.notification_template_big_media_narrow",
+                "R.layout.notification_template_big_media_narrow_custom",
+                "R.layout.notification_template_custom_big",
+                "R.layout.notification_template_icon_group",
+                "R.layout.notification_template_lines_media",
+                "R.layout.notification_template_media",
+                "R.layout.notification_template_media_custom",
+                "R.layout.notification_template_part_chronometer",
+                "R.layout.notification_template_part_time",
+                "R.string.app_name",
+                "R.string.status_bar_notification_info_overflow",
+                "R.style.EditTextStyle",
+                "R.style.TextAppearance_Compat_Notification",
+                "R.style.TextAppearance_Compat_Notification_Info",
+                "R.style.TextAppearance_Compat_Notification_Info_Media",
+                "R.style.TextAppearance_Compat_Notification_Line2",
+                "R.style.TextAppearance_Compat_Notification_Line2_Media",
+                "R.style.TextAppearance_Compat_Notification_Media",
+                "R.style.TextAppearance_Compat_Notification_Time",
+                "R.style.TextAppearance_Compat_Notification_Time_Media",
+                "R.style.TextAppearance_Compat_Notification_Title",
+                "R.style.TextAppearance_Compat_Notification_Title_Media",
+                "R.style.Theme_Dialog_TTDownload",
+                "R.style.Theme_Dialog_TTDownloadOld",
+                "R.style.Widget_Compat_NotificationActionContainer",
+                "R.style.Widget_Compat_NotificationActionText",
+                "R.style.Widget_Support_CoordinatorLayout",
+                "R.style.quick_option_dialog",
+
+                "R.dimen.ksad_*",
+                "R.color.ksad_*",
+                "R.drawable.ksad_*",
+                "R.layout.ksad_*",
+                "R.string.ksad_*",
+                "R.anim.ksad_*",
+                "R.raw.ksad_*",
+                "R.id.ksad_*",
+                "R.style.ksad_*",
+                "R.attr.ksad_*",
+                "R.dimen.ksad_*",
+                "com.kwai.video.ksvodplayerkit.R.string.*",
+                "com.kwai.video.ksvodplayerkit.R.raw.kwaiplayer*",
+                "com.kwad.sdk.R.raw.kwaiplayer*",
+
+                "R.drawable.gdt_*",
+                "R.layout.gdt_*",
+                "R.string.gdt_*",
+                "R.id.gdt_*",
+
+                "R.drawable.fox_*",
+                "R.drawable.progress_bar_bg*",
+                "R.drawable.default_image_background*",
+                "R.drawable.FoxStreamerView*",
+                "R.layout.fox_*",
+                "R.string.fox_*",
+                "R.id.fox_*",
+                "R.color.color_*",
+                "R.color.base_*",
+                "R.style.Fox_*",
+                "R.style.TranslucentActivityStyle",
+                "R.style.Widget.GifView",
+                "R.style.Theme.CustomDialog",
+                "R.style.MyTheme",
+
+                "R.drawable.icon_magic_*",
+                "R.drawable.anythink*",
+                "R.layout.anythink*",
+                "R.string.anythink*",
+                "R.id.anythink*",
+
+                // huawei push
+                "R.string.hms*",
+                "R.string.connect_server_fail_prompt_toast",
+                "R.string.getting_message_fail_prompt_toast",
+                "R.string.no_available_network_prompt_toast",
+                "R.string.third_app_*",
+                "R.string.upsdk_*",
+                "R.layout.hms*",
+                "R.layout.upsdk_*",
+                "R.drawable.upsdk*",
+                "R.color.upsdk*",
+                "R.dimen.upsdk*",
+                "R.style.upsdk*",
+                "R.string.agc*",
+
+                // 愉悦推
+                "R.drawable.background_circle",
+                "R.drawable.mdtec*",
+                "R.layout.mdtec*",
+                "R.string.accessibility_description",
+                "R.string.feedback_hint",
+                "R.string.mdtec*",
+                "R.style.mdTaskDialog",
+                "R.style.mdtec*",
+                "R.color.translucent_background",
+
+                "R.id.fl_content",
+                "R.id.home_ad_container",
+                "R.layout.activity_inter_container",
+                // mtg
+                "R.string.mbridge*",
+                "R.layout.mbridge*",
+                "R.drawable.mbridge*",
+                "R.anim.mbridge*",
+                "R.color.mbridge*",
+                "R.style.mbridge*",
+                "R.id.mbridge*",
+
+                //toggle
+                "R.layout.notification_tools_toggle",
+                "R.drawable.little_icon",
+                "R.drawable.icon_toggle_battery_white",
+                "R.drawable.icon_toggle_battery",
+                "R.drawable.icon_toggle_clean_white",
+                "R.drawable.icon_toggle_clean",
+                "R.drawable.icon_toggle_cpu_white",
+                "R.drawable.icon_toggle_cpu",
+                "R.drawable.icon_toggle_notification",
+                "R.layout.view_toggle_content_for_weather",
+                "R.layout.view_toggle_content",
+                "R.layout.notification_tools_toggle_night",
+                "R.layout.notification_tools_toggle_for_weather",
+                "R.layout.notification_tools_toggle_bad_weather",
+                "R.drawable.shape_toggle_background",
+                "R.drawable.shape_toggle_background_bad_weather",
+                "R.drawable.shape_toggle_background_night",
+                "R.id.toggle_*",
+                "R.mipmap.advancedpage_icon_*",
+
+                //sigmob
+                "R.drawable.sig_*",
+                "R.layout.sig_*",
+                "R.string.sig_*",
+                "R.style.sig_*",
+                "R.anim.sig_*",
+
+                //极光
+                "R.drawable.jpush_notification_icon",
+                // 极光认证
+                "R.drawable.umcsdk*",
+                "R.drawable.jverify_dialog",
+                "R.anim.umcsdk*"
+        ]
+        compressFilePattern = [
+                "*.png",
+                "*.jpg",
+                "*.jpeg",
+                "*.gif",
+        ]
+        use7zip = !isMacOsX()
+        sevenzip {
+            if(!isMacOsX()){
+                artifact = 'com.tencent.mm:SevenZip:1.2.20'
+            }
+            //path = "/usr/local/bin/7za"
+        }
+
+        /**
+         * 可选： 如果不设置则会默认覆盖assemble输出的apk
+         **/
+        // finalApkBackupPath = "${project.rootDir}/final.apk"
+
+        /**
+         * 可选: 指定v1签名时生成jar文件的摘要算法
+         * 默认值为“SHA-1”
+         **/
+        // digestalg = "SHA-256"
+    }
+}
+
