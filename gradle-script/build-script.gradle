@@ -1,18 +1,4 @@
-// 仓库
-def repositories = {
-    // 保持顺序
-    maven { url 'https://maven.aliyun.com/repository/google' }
-    // central仓和jcenter仓的聚合仓
-    maven { url 'https://maven.aliyun.com/repository/public' }
-    maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
-    maven { url 'https://www.jitpack.io' }
-
-    // 此配置会报此⚠️：Using flatDir should be avoided because it doesn't support any meta-data formats
-    // 解决办法：发布aar到一个本地或远程仓库，然后进行aar的依赖
-    // flatDir {
-    //    dirs 'libs'
-    // }
-}
+// ⚠️添加属性需要在该文件底部的ext里推添加配置
 
 def androidSdk = [
         "compileSdk": 31,
@@ -28,25 +14,58 @@ def versions = [
         checkDepsVersion: "0.39.0", // 依赖版本检查
 ]
 
+
+// 仓库
+def repositories = {
+    // 保持顺序
+    maven { url "https://maven.aliyun.com/repository/google" }
+    // central仓和jcenter仓的聚合仓
+    maven { url "https://maven.aliyun.com/repository/public" }
+    maven { url "https://maven.aliyun.com/repository/gradle-plugin" }
+    maven { url "https://www.jitpack.io" }
+
+    // 此配置会报此⚠️：Using flatDir should be avoided because it doesn"t support any meta-data formats
+    // 解决办法：发布aar到一个本地或远程仓库，然后进行aar的依赖
+    // flatDir {
+    //    dirs "libs"
+    // }
+}
+
+def pluginDeps = {
+    classpath config.gradlePlugin.android
+    classpath config.gradlePlugin.kotlin
+    // maven仓库上传
+    classpath config.gradlePlugin.mavenUpload
+    // 资源混淆
+    classpath config.gradlePlugin.andResGuard
+    // 依赖版本check
+    classpath config.gradlePlugin.checkDepsVersion
+}
+
+
 def gradlePlugin = [
         android         : "com.android.tools.build:gradle:${versions.androidPlugin}",
         kotlin          : "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}",
         mavenUpload     : "com.github.dcendents:android-maven-gradle-plugin:${versions.mavenUpload}",
         andResGuard     : "com.tencent.mm:AndResGuard-gradle-plugin:${versions.andResGuard}",
         checkDepsVersion: "com.github.ben-manes:gradle-versions-plugin:${versions.checkDepsVersion}",
-
 ]
 
 def depsVersion = [
-        core     : '1.7.0',
-        appcompat: '1.4.0',
-        activity : '1.4.0',
-        fragment : '1.3.6',
-        lifecycle: '2.4.0',
+        core            : "1.7.0",
+        appcompat       : "1.4.0",
+        activity        : "1.4.0",
+        fragment        : "1.3.6",
+        lifecycle       : "2.4.0",
+        coroutines      : "1.5.2",
+        okhttp          : "4.9.0",
+        retrofit        : "2.9.0",
+        statefulLiveData: "1.1.0",
 ]
 
+
 def deps = [
-        android: [
+        android         : [
                 core              : "androidx.core:core-ktx:${depsVersion.core}",
                 appcompat         : "androidx.appcompat:appcompat:${depsVersion.appcompat}",
                 activityKtx       : "androidx.activity:activity-ktx:${depsVersion.activity}",
@@ -59,27 +78,49 @@ def deps = [
                 livedata          : "androidx.lifecycle:lifecycle-livedata-ktx:${depsVersion.lifecycle}",
 
                 // UI
+                material          : "com.google.android.material:material:1.4.0",
                 constraintLayout  : "androidx.constraintlayout:constraintlayout:2.1.1",
                 recyclerview      : "androidx.recyclerview:recyclerview:1.2.1",
+                flexbox           : "com.google.android.flexbox:flexbox:3.0.0",
 
-                "multidex"        : "androidx.multidex:multidex:2.0.1",
-        ],
-        kotlin : [
 
+                multidex          : "androidx.multidex:multidex:2.0.1",
         ],
-        third  : [
+
+        kotlin          : [
+                android: "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2",
+                jdk8   : "org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.5.2",
+                rx2    : "org.jetbrains.kotlinx:kotlinx-coroutines-rx2:1.5.2",
+        ],
+
+        http            : [
+                okhttp            : "com.squareup.okhttp3:okhttp:${depsVersion.okhttp}",
+                interceptorLogging: "com.squareup.okhttp3:logging-interceptor:${depsVersion.okhttp}",
+                retrofit          : "com.squareup.retrofit2:retrofit:${depsVersion.retrofit}",
+                converterGson     : "com.squareup.retrofit2:converter-gson:${depsVersion.retrofit}",
+        ],
+
+        statefulLiveData: [
+                core      : "com.github.climacell.statefullivedata:core:${depsVersion.statefulLiveData}",
+                coroutines: "com.github.climacell.statefullivedata:coroutines:${depsVersion.statefulLiveData}",
+                retrofit  : "com.github.climacell.statefullivedata:retrofit:${depsVersion.statefulLiveData}",
+        ],
+
+        third           : [
+                wechat   : "com.tencent.mm.opensdk:wechat-sdk-android-without-mta:6.8.0",
                 x5webview: "com.tencent.tbs:tbssdk:44085",
         ],
-
-
 ]
 
-
+// ⚠️必须在底部，新增属性需在在这里添加
 ext.config = [
         "repositories": repositories,
+        "pluginDeps"  : pluginDeps,
         "androidSdk"  : androidSdk,
         "versions"    : versions,
         "gradlePlugin": gradlePlugin,
         "deps"        : deps,
 ]
+
+
 

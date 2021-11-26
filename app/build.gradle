@@ -1,2 +1,2 @@
-apply from: '../gradle-script/base-app.gradle'
+apply from: '../gradle-script/build-app.gradle'
 

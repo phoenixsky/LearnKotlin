@@ -39,5 +39,8 @@ dependencies {
     implementation config.deps.android.lifecycle
     implementation config.deps.android.lifecycleProcess
     implementation config.deps.android.livedata
+    implementation config.deps.kotlin.android
+    implementation config.deps.kotlin.jdk8
+    implementation config.deps.kotlin.rx2
 
 }

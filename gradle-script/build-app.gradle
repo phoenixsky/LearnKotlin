@@ -1,11 +1,11 @@
 apply plugin: 'com.android.application'
 
 // 基础module
-apply from: '../gradle-script/base-module.gradle'
+apply from: '../gradle-script/build-module.gradle'
 
 // 资源混淆
 apply plugin: 'AndResGuard'
-apply from: '../gradle-script/andResguard.gradle'
+apply from: '../gradle-script/function/andResguard.gradle'
 
 
 android {
@@ -14,8 +14,6 @@ android {
         versionCode APP_VERSION_CODE as int
         versionName APP_VERSION_NAME
     }
-
-
 }
 
 dependencies {

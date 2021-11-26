@@ -1,2 +1,3 @@
 rootProject.name = "LearnKotlin"
 include ':app'
+include ':module-cross-call'
