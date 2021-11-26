@@ -1,0 +1,12 @@
+apply plugin: 'com.android.library'
+
+
+// 基础module
+apply from: '../gradle-script/build-module.gradle'
+
+dependencies {
+
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+}
